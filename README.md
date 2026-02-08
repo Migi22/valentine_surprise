@@ -21,5 +21,6 @@ Perfect for fun, interactive experiences or small web projects.
 - **Version Control:** Git + GitHub
 
 ## Website Link
-Currently not deployed: **N/A for now**
+
+[![Website Coming Soon](https://img.shields.io/badge/Website-Coming%20Soon-lightgrey)](#)
 
