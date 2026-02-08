@@ -9,13 +9,29 @@ function Welcome() {
 
   const isReady = useMemo(() => pin.trim().length > 0, [pin]);
 
-  const handleUnlock = () => {
-    if (pin === "1234") {
-      navigate("/surprise");
-      return;
+  const handleUnlock = async () => {
+    setError("");
+
+    try {
+        const res = await fetch("/api/verify-pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin }),
+        });
+
+        if (res.ok) {
+            sessionStorage.setItem("valentine_unlocked", "true");
+            navigate("/surprise");
+            return;
+        }
+
+        const data = await res.json().catch(() => ({}));
+        setError(data.message || "Incorrect code.");
+    } catch {
+        setError("Server error. Try again.");
     }
-    setError("That code doesn’t match. Try again.");
   };
+    
 
   const handleChange = (e) => {
     setPin(e.target.value);
