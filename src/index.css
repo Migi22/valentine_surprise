@@ -1,0 +1,307 @@
+/* === CSS Variables === */
+:root {
+  --primary-purple: #c79aff;   /* soft lavender */
+  --background-light: #fdf6ff; /* light lavender-ish background */
+  --text-dark: #4b3c57;        /* dark purple text */
+  --accent: #f9c5ff;           /* for buttons or highlights */
+}
+
+/* Reset some defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Full-page animated gradient background */
+body, html, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: linear-gradient(-45deg, #fdf6ff, #f9c5ff, #c79aff, #e0c0ff);
+  background-size: 400% 400%;
+  animation: gradientMove 18s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  overflow: hidden;
+  position: relative;
+}
+
+/* soft moving glow layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.25), transparent 60%),
+    radial-gradient(circle at 60% 20%, rgba(199, 154, 255, 0.22), transparent 55%);
+  filter: blur(18px);
+  animation: glowDrift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glowDrift {
+  0% { transform: translate(-2%, -2%) scale(1.02); }
+  100% { transform: translate(2%, 2%) scale(1.06); }
+}
+
+/* Centered container */
+.app-container {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+}
+
+/* Buttons using accent color */
+button {
+  padding: 10px 20px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: var(--text-dark);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-purple);
+  color: white;
+}
+
+/* Input box styling */
+input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-purple);
+  margin-top: 10px;
+}
+
+/* Layout */
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Note-style card */
+.noteCard {
+  width: min(720px, 100%);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+/* A subtle “paper edge” so it feels designed */
+.noteCard::before {
+  content: "";
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+
+/* Typography */
+.noteHeader {
+  margin-bottom: 16px;
+}
+
+.noteTag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  letter-spacing: 0.4px;
+}
+
+.noteTitle {
+  margin: 12px 0 8px;
+  font-size: clamp(28px, 4.6vw, 40px);
+  line-height: 1.1;
+  color: #2a2132;
+}
+
+.noteText {
+  margin: 0;
+  font-size: clamp(14px, 2.8vw, 18px);
+  line-height: 1.55;
+  color: rgba(42, 33, 50, 0.78);
+}
+
+/* Form */
+.noteBody {
+  margin-top: 18px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.fieldInput {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  outline: none;
+  font-size: 16px;
+}
+
+.fieldInput:focus {
+  border-color: rgba(0, 0, 0, 0.28);
+}
+
+.primaryBtn {
+  height: 48px;
+  border-radius: 14px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  background: rgba(42, 33, 50, 0.92);
+  color: white;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.primaryBtn:active {
+  transform: translateY(1px);
+}
+
+.fieldError {
+  margin: 10px 0 0;
+  font-weight: 650;
+  color: #7a1f3d;
+}
+
+.hint {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: rgba(42, 33, 50, 0.6);
+}
+
+/* Desktop layout: input + button side-by-side */
+@media (min-width: 640px) {
+  .noteCard {
+    padding: 28px;
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .primaryBtn {
+    padding: 0 18px;
+    white-space: nowrap;
+  }
+}
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.06);
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 34px;
+  font-weight: 750;
+  color: #2a2132;
+}
+
+.subtitle {
+  margin: 0 0 22px;
+  color: rgba(42, 33, 50, 0.8);
+  line-height: 1.5;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: rgba(42, 33, 50, 0.75);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.85);
+  outline: none;
+  font-size: 16px;
+}
+
+.input:focus {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.button {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 650;
+  background: rgba(42, 33, 50, 0.92);
+  color: white;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.error {
+  margin: 12px 0 0;
+  color: #7a1f3d;
+  font-weight: 600;
+}
+
+.fineprint {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: rgba(42, 33, 50, 0.6);
+}
