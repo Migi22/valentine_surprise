@@ -1,4 +1,4 @@
-# Valentine Surprise 🎁
+# Valentine Surprise
 
 A simple ReactJS app that unlocks a secret surprise page with a PIN.  
 Perfect for fun, interactive experiences or small web projects.
@@ -16,11 +16,10 @@ Perfect for fun, interactive experiences or small web projects.
 ## 🛠 Tech Stack
 
 - **Frontend:** ReactJS (Vite)
-- **Styling:** CSS / Tailwind CSS
-- **Hosting:** Vercel (planned)
+- **Hosting:** Vercel
 - **Version Control:** Git + GitHub
 
 ## Website Link
 
-[![Website Coming Soon](https://img.shields.io/badge/Website-Coming%20Soon-lightgrey)](#)
+[![Website Live](https://img.shields.io/badge/Website-Live-brightgreen)](https://mayang-valentine.vercel.app/)
 
